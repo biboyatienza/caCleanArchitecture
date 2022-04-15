@@ -67,3 +67,10 @@ The Entity Framework tools version '6.0.3' is older than that of the runtime '6.
 ```
 $ dotnet tool update --global dotnet-ef
 ```
+
+### Removing nullable warnings
+By default, Nullable is enable on YOUR_PROJECT.csproj.
+Make the value as disable in order for the warning to disappear.  
+```
+  <Nullable>disable</Nullable>
+```
