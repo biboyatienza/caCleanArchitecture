@@ -56,10 +56,13 @@ https://docs.microsoft.com/en-us/ef/core/cli/dotnet
 * Add migration
 ```
 caCleanArchitecture/Infra/Infrastructure$ dotnet ef migrations add InitialDbCreation -s ../../Host/WebApi  --verbose
+caCleanArchitecture/Infra/Infrastructure$ dotnet ef migrations add AddProductTable -s ../../Host/WebApi  --verbose
+
 ```
 * Updating database
 ```
 caCleanArchitecture/Infra/Infrastructure$ dotnet ef database update InitialDbCreation -s ../../Host/WebApi  
+caCleanArchitecture/Infra/Infrastructure$ dotnet ef database update -s ../../Host/WebApi  
 ```
 
 ### Updating to latest version of .net Entity Framework tools 
@@ -73,4 +76,27 @@ By default, Nullable is enable on YOUR_PROJECT.csproj.
 Make the value as disable in order for the warning to disappear.  
 ```
   <Nullable>disable</Nullable>
+```
+
+### Apply late .gitignore file
+```
+$ git rm -r --cached . 
+$ git add .
+$ git commit -m 'Removed all files that are in the .gitignore' 
+$ git push origin master
+```
+
+### .net 6 IOrderedQueryable does not contain a definition for 'ToListAsync'
+* https://stackoverflow.com/questions/64933763/dbset-does-not-contain-a-definition-for-tolistasync-although-im-using-ne
+
+Use this Microsoft.EntityFrameworkCore namespace.
+
+```
+using Microsoft.EntityFrameworkCore
+```
+
+### This async method lacks ‘await’ operators and will run synchronously. Consider using the ‘await’ operator to await non-blocking API calls, or ‘await Task.Run(…)’ to do CPU-bound work on a background thread.
+
+```
+  return awit Task.FromResult<object>(null);
 ```
